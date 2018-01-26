@@ -12,4 +12,5 @@ Environment=RUAEMAIL=dmarc@example.com
 Environment=IMAPSERVER=msa.example.com
 Environment=RUAFOLDER=INBOX/rua
 Environment=PWDFILE=/usr/local/dmarc-report-processor/pwd
-ExecStart=${DMARC_HOME}/dmarc-convertor.sh -u ${RUAEMAIL} -s ${IMAPSERVER} -P ${PWDFILE} -c /etc/pki/tls/certs/ca-bundle.crt
+### FIXME Hardcoded path here
+ExecStart=/opt/DMARCReportProcessor/dmarc-convertor.sh -u ${RUAEMAIL} -s ${IMAPSERVER} -P ${PWDFILE} -c /etc/pki/tls/certs/ca-bundle.crt
