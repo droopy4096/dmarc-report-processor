@@ -26,7 +26,7 @@ import datetime
 class IMAP4_SSL_Ex(imaplib.IMAP4_SSL):
   def __init__(self, host = '', port = imaplib.IMAP4_SSL_PORT,
                                 ca_certs = None, cert_reqs = ssl.CERT_REQUIRED,
-                                ssl_version = ssl.PROTOCOL_TLSv1):
+                                ssl_version = ssl.PROTOCOL_TLSv1_2):
     self.cert_reqs = cert_reqs
     self.ca_certs = ca_certs
     self.ssl_version = ssl_version

@@ -12,20 +12,28 @@
 # 3. Convert dmarc xml files to line oriented format for splunk
 #
 
-ROOT='/usr/local/dmarc-report-processor'
-DMARC_ROOT="${ROOT}/var"
-ATTACH="${DMARC_ROOT}/attach_raw"
-XML="${DMARC_ROOT}/dmarc_xml"
-DMARC_SPLUNK="${DMARC_ROOT}/dmarc_splunk"
+# ROOT='/usr/local/dmarc-report-processor'
+ROOT=${DMARC_REPORT_ROOT:-'/usr/local/dmarc-report-processor'}
+DMARC_ROOT=${DMARC_DATA_ROOT:-"${ROOT}/var"}
+ATTACH=${DMARC_ATTACHMENTS_DIR:-"${DMARC_ROOT}/attach_raw"}
+XML=${DMARC_XML_DIR:-"${DMARC_ROOT}/dmarc_xml"}
+DMARC_SPLUNK=${DMARC_SPLUNK_DIR:-"${DMARC_ROOT}/dmarc_splunk"}
+RUAFOLDER=${DMARC_RUA_FOLDER:-INBOX}
+DMARC_DATE_RANGE=${DMARC_DATE_RANGE:-"yesterday 00:00 "}
 
-os=`uname`
-ydate=`date -d "yesterday 00:00 " '+%d-%h-%Y'`
-#ydate=`date -d "1 week ago 13:00 " '+%d-%h-%Y'`
 if [ "$os" == "Darwin" ]
 then
-  ydate=`date -v-1d +%d-%h-%Y`
+  # ydate=`date -v-1d +%d-%h-%Y`
+  DATE_RANGE_OPT='-v'
+else
+  DATE_RANGE_OPT='-d '
 fi
 
+DMARC_DATE_RANGE=${DMARC_DATE_RANGE:-"yesterday 00:00 "}
+
+os=`uname`
+ydate=`date ${DATE_RANGE_OPT}"${DMARC_DATE_RANGE} " '+%d-%h-%Y'`
+#ydate=`date -d "1 week ago 13:00 " '+%d-%h-%Y'`
 tdate=`date '+%d-%h-%Y'`
 
 d_host=""
@@ -88,10 +96,10 @@ then
 fi
 
 # create directory if it doesn't exists. Ignore error if exists
-mkdir -m 0755 ${DMARC_ROOT} 2> /dev/null
-mkdir -m 0755 ${ATTACH} 2> /dev/null
-mkdir -m 0755 ${XML} 2> /dev/null
-mkdir -m 0755 ${DMARC_SPLUNK} 2> /dev/null
+mkdir -p -m 0755 ${DMARC_ROOT} 
+mkdir -p -m 0755 ${ATTACH} 
+mkdir -p -m 0755 ${XML} 
+mkdir -p -m 0755 ${DMARC_SPLUNK} 
 mkdir -m 0755 ${ATTACH}/${ydate}
 if [ "$?" -ne "0" ]
 then
