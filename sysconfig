@@ -2,4 +2,5 @@ User=myuser
 Environment=RUAEMAIL=dmarc@example.com
 Environment=IMAPSERVER=msa.example.com
 Environment=RUAFOLDER=INBOX
+Environment=DMARC_HOME=/opt/DMARCReportProcessor
 Environment=PWDFILE=/etc/dmarcReportProcessor/pwd
