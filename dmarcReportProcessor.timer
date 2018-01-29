@@ -11,4 +11,5 @@ After=syslog.target network.target
 OnCalendar=daily
 
 [Install]
-WantedBy=rsyslog.service
+# WantedBy=rsyslog.service
+WantedBy=dmarcReportProcessor.service
