@@ -13,7 +13,7 @@ Environment=DMARC_RUA_EMAIL=dmarc@example.com
 Environment=DMARC_IMAP_SERVER=msa.example.com
 Environment=DMARC_RUA_FOLDER=INBOX/rua
 Environment=DMARC_IMAP_PWDFILE=/usr/local/dmarc-report-processor/pwd
-User=${DMARC_SYSTEM_USER}
+User=root
 Group=wheel
 ### FIXME Hardcoded path here
 ExecStart=/opt/DMARCReportProcessor/dmarc-convertor.sh -u ${DMARC_RUA_EMAIL} -s ${DMARC_IMAP_SERVER} -P ${DMARC_IMAP_PWDFILE} -c /etc/pki/tls/certs/ca-bundle.crt
